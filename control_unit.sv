@@ -17,8 +17,14 @@ module control_unit (
     assign func7 = inst[31:25];
 
     always_comb begin
-        sel_pA = 1'b0;
-        sel_pB = 1'b0;
+        if (inst1[11:7] == inst[19:15])
+            sel_pA = 1;
+        else
+            sel_pA = 0;
+         if (inst1[11:7] == inst[24:20])
+            sel_pB = 1;
+        else
+            sel_pB = 0;
         // R-Type
         if (opcode == 7'b0110011) begin
             reg_wr = 1;
